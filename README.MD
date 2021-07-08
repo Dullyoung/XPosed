@@ -45,4 +45,19 @@
     you can see your mudule in xposed installer app's mudules part
     Enable it and reboot your devices,then your xposed app is working.
 
+# About reinfoce app
 
+- First get context . Usually , hook shell to get `Context`
+- then use context get classLoader 
+- now you can hook use the runtime classLoader hook the real app like without reinforced,
+eg.
+```java
+    XposedHelpers.findAndHookMethod("xxx", classLoader, "a", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                super.beforeHookedMethod(param);
+            }
+        })
+```
+
+replace method,use xc_replacementMethod,modify return value use params.setResult
